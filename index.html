@@ -21,8 +21,6 @@
     html,
     body {
       background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
-      /* background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); */
-      /* background-color: #FED2D3; */
       margin: 0;
       font-family: 'Noto Sans TC', sans-serif;
       color: white;
@@ -47,8 +45,6 @@
     .card {
       border-radius: calc(12vw/19.2);
       margin: calc(-10vw/19.2) 0 calc(20vw/19.2) 0;
-      /* border: calc(2vw/19.2) solid ; */
-      /* background-image: linear-gradient(27deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%); */
       background-color: #EFA2B4;
     }
     .card-title {
@@ -278,7 +274,6 @@
       background-color: #EDE9F2;
     }
     .btn {
-      /* background-image: linear-gradient(120deg, #3e6ebc 0%, #4286f4 100%); */
       background-color: #B55679;
       color: white;
       width: 100%;
@@ -514,7 +509,7 @@
   // 初始抽獎動畫
   let text = '還不快來慶祝品品生日!!!';  // The message displayed
   let chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890() ';  // All possible Charactrers
-  let scale = 40;  // Font size and overall scale
+  let scale = 35;  // Font size and overall scale
   let breaks = 0.003;  // Speed loss per frame
   let endSpeed = 0.05;  // Speed at which the letter stops
   let firstLetter = 250;  // Number of frames untill the first letter stopps (60 frames per second)
@@ -650,26 +645,6 @@
   }
 
 
-  // function modeChange() {
-  //   let auto = document.querySelector('.auto-input')
-  //   let hand = document.querySelector('.hand-input')
-  //   let deleteBtn = document.querySelector('.deleteBtn')
-  //   auto.classList.remove('disable')
-  //   hand.classList.remove('disable')
-  //   deleteBtn.classList.remove('disable')
-  //   if( nowMode === 'auto')
-  //   {
-  //     auto.classList.add('disable')
-  //     deleteBtn.classList.add('disable')
-  //     nowMode = 'hand'
-  //     toastr.info('進入手動輸入模式')
-  //   } else {
-  //     hand.classList.add('disable')
-  //     nowMode = 'auto'
-  //     toastr.info('進入自動轉換模式')
-  //   }
-  // }
-
 
   function getDrawList() {
     let newList = []
@@ -690,13 +665,11 @@
     } else {
       filterList = winnerList.slice(drawAmount*(-1))
     }
-    console.log(filterList);
     if(!subOnly) {
       if(!!inputArea.trim()) {
         let seperate = inputArea.trim().split(/\n+/)
         let filtedList = []
         for (let i = 0; i < seperate.length; i++) {
-          console.log(!filterList.includes(seperate[i]));
           if (!autoFilter || !filterList.includes(seperate[i])) {
             filtedList.push(seperate[i])
           }
@@ -712,32 +685,10 @@
           filtedList.push(seperate[i])
         }
       }
-      console.log(seperate);
       list = list.concat(filtedList)
     }
     return list
   }
-
-  // //抽獎者名單轉換
-  // function outputDrawList() {
-  //   let excelInputArea = document.querySelector('.inputArea')
-  //   let multipleTransform = document.querySelector('.multipleTransform')
-  //   let excelData = excelInputArea.value
-  //   if(!!excelData.trim()) {
-  //     let seperate = excelData.trim().split(/\s+/)
-  //     let complicateData = seperate
-  //     seperate.forEach((e,index) => {
-  //       if(e.split("")[0] == '('){
-  //         complicateData[index-1] = complicateData[index-1] + e
-  //         complicateData.splice(index,1)
-  //       }
-  //     });
-  //     let finalData = makeDrawList(complicateData,1)
-  //     multipleTransform.innerHTML = finalData
-  //   } else {
-  //     multipleTransform.innerHTML = ''
-  //   }
-  // }
   
   
   function copy(e) {
@@ -768,10 +719,7 @@
     }
     drawAmount += 1
     nowDrawNumber.innerText = drawAmount
-    console.log(winnerList);
-
     winnerList.push(winner)
-    console.log(winnerList);
     setTimeout(() => {
       renewWinnerForm()
     }, 4500);
@@ -780,7 +728,6 @@
   //重新整理得獎者名單
   function renewWinnerForm() {
     let winnerHtml = ''
-    console.log(winnerList);
     for (let i = 0; i < winnerList.length; i ++) {
       winnerHtml = winnerHtml + `${winnerList[i]}\n`
     }
@@ -838,34 +785,5 @@
     renewWinnerForm()
   }
 
-  //刪除中獎的那些資料
-  // function deleteWinnerInList() {
-  //   console.log('aaaaaaaaaaaaaaaaaaa');
-  //   if(winnerMode === 'read'){
-  //     if(nowMode === 'auto'){
-  //       let data = ''
-  //       let form = document.querySelector('.multipleTransform.auto')
-  //       if (form.value) {
-  //         let array = form.value.trim().split(/\s+/)
-  //         console.log(winnerNames);
-  //         console.log(array);
-  //         for (let i = 0; i < array.length; i+=2) {
-  //           if (!winnerNames.includes(`${array[i+1]}`)) {
-  //             console.log(array[i+1]);
-  //             data = data + `${array[i]} ${array[i+1]}\n`
-  //           }
-  //         }
-  //         console.log(data);
-  //         if (data !== '') {
-  //           form.innerHTML = data
-  //         } else {
-  //           form.innerHTML = ''
-  //         }
-  //       }
-  //     }
-  //   }else {
-  //     toastr.error('請先儲存中獎者名單')
-  //   }
-  // }
 </script>
 </html>
